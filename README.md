@@ -6,13 +6,11 @@ Welcome to the source code for my personal portfolio website.
 
 This portfolio showcases my projects, technical skills, education, certifications, and experience in Artificial Intelligence, Machine Learning, Data Analytics, and Software Development.
 
----
 
 ## Live Website
 
 🔗 
 
----
 
 ## About
 
@@ -24,7 +22,6 @@ The website was designed to serve as a central hub for my professional work, inc
 - Resume
 - Contact Information
 
----
 
 ## 🛠 Tech Stack
 
@@ -48,7 +45,6 @@ Version Control
 - Git
 - GitHub
 
----
 
 ## Features
 
@@ -59,7 +55,6 @@ Version Control
 - Contact Section
 - Dark/Light Theme (if applicable)
 
----
 
 ## Running Locally
 
@@ -73,18 +68,14 @@ npm install
 npm run dev
 ```
 
----
 
 ## Deployment
 
 The website is deployed using Vercel and automatically updates when changes are pushed to the main branch.
 
----
 
 ## Contact
 
 - LinkedIn
 - GitHub
 - Email
-
----
