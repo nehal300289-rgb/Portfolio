@@ -18,24 +18,26 @@ export default function BackgroundCanvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    const canvasElement = canvasRef.current;
+   const canvasFromRef = canvasRef.current;
 
-    if (!canvasElement) return;
+if (!canvasFromRef) return;
 
-    const canvasContext = canvasElement.getContext("2d");
+const canvas: HTMLCanvasElement = canvasFromRef;
 
-    if (!canvasContext) return;
+    const context = canvas.getContext("2d");
+
+    if (!context) return;
 
     let width = window.innerWidth;
     let height = window.innerHeight;
-    let animationFrameId: number;
+    let animationFrameId = 0;
 
-    function resize() {
+    function resize(targetCanvas: HTMLCanvasElement) {
       width = window.innerWidth;
       height = window.innerHeight;
 
-      canvasElement.width = width;
-      canvasElement.height = height;
+      targetCanvas.width = width;
+      targetCanvas.height = height;
     }
 
     function makeParticle(): Particle {
@@ -50,17 +52,21 @@ export default function BackgroundCanvas() {
       };
     }
 
-    resize();
+    resize(canvas);
 
     const particles: Particle[] = Array.from({ length: 80 }, makeParticle);
 
-    function draw() {
-      canvasContext.clearRect(0, 0, width, height); 
+    function draw(canvasContext: CanvasRenderingContext2D) {
+      canvasContext.clearRect(0, 0, width, height);
 
       for (let i = 0; i < particles.length; i++) {
+        const particleA = particles[i];
+
         for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
+          const particleB = particles[j];
+
+          const dx = particleA.x - particleB.x;
+          const dy = particleA.y - particleB.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < 120) {
@@ -69,8 +75,8 @@ export default function BackgroundCanvas() {
               0.07 * (1 - distance / 120)
             })`;
             canvasContext.lineWidth = 0.5;
-            canvasContext.moveTo(particles[i].x, particles[i].y);
-            canvasContext.lineTo(particles[j].x, particles[j].y);
+            canvasContext.moveTo(particleA.x, particleA.y);
+            canvasContext.lineTo(particleB.x, particleB.y);
             canvasContext.stroke();
           }
         }
@@ -78,13 +84,7 @@ export default function BackgroundCanvas() {
 
       particles.forEach((particle) => {
         canvasContext.beginPath();
-        canvasContext.arc(
-          particle.x,
-          particle.y,
-          particle.r,
-          0,
-          Math.PI * 2
-        );
+        canvasContext.arc(particle.x, particle.y, particle.r, 0, Math.PI * 2);
 
         canvasContext.fillStyle = particle.color;
         canvasContext.globalAlpha = particle.alpha;
@@ -103,14 +103,18 @@ export default function BackgroundCanvas() {
         }
       });
 
-      animationFrameId = requestAnimationFrame(draw);
+      animationFrameId = requestAnimationFrame(() => draw(canvasContext));
     }
 
-    window.addEventListener("resize", resize);
-    draw();
+    function handleResize() {
+      resize(canvas);
+    }
+
+    window.addEventListener("resize", handleResize);
+    draw(context);
 
     return () => {
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
