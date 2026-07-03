@@ -52,3 +52,33 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
 ];
+
+export type EducationItem = {
+  date: string;
+  title: string;
+  institution: string;
+  description: string;
+};
+
+export const educationItems: EducationItem[] = [
+  {
+    date: "Jan 2026 – Aug 2026",
+    title: "PG Certificate — Integrated Artificial Intelligence",
+    institution: "Southern Alberta Institute of Technology (SAIT) · Calgary, AB",
+    description:
+      "Applied ML, predictive analytics, AI ethics, cloud deployment, and human-centric AI systems.",
+  },
+  {
+    date: "Jan 2025 – Aug 2025",
+    title: "PG Certificate — Product Management",
+    institution: "Southern Alberta Institute of Technology (SAIT) · Calgary, AB",
+    description:
+      "Capstone: Full product strategy for an esports SaaS platform (CoachGG) — market research, roadmap, clickable prototype, and go-to-market plan.",
+  },
+  {
+    date: "Graduated Apr 2024",
+    title: "Bachelor of Commerce — Major in Statistics",
+    institution: "H.L. College of Commerce · Ahmedabad, India · First Distinction",
+    description: "CGPA: 8.2 / 10",
+  },
+];
