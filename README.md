@@ -56,13 +56,13 @@ data/
 Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/your-repository-name.git
+git clone https://github.com/nehal300289-rgb/Portfolio.git
 ```
 
 Go into the project folder:
 
 ```bash
-cd your-repository-name
+cd Portfolio.git
 ```
 
 Install dependencies:
@@ -97,6 +97,6 @@ This project is intended to be deployed on Vercel.
 
 ## About This Project
 
-This portfolio was created as a central place to present my learning journey from Statistics and Product Management into Applied Artificial Intelligence.
+This portfolio was created as a central place to present my learning journey from Statistics and Product Management into Integrated Artificial Intelligence.
 
 It is also a practical Next.js project demonstrating component-based architecture, TypeScript, reusable data structures, and frontend design.
